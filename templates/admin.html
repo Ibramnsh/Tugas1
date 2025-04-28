@@ -1,0 +1,61 @@
+<!-- templates/admin.html -->
+{% extends "base.html" %} {% block title %}Admin Dashboard{% endblock %} {%
+block content %}
+<h1>Admin Dashboard</h1>
+
+<div class="card">
+  <h2>Users</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Admin</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.id }}</td>
+        <td><a href="/profile/{{ user.username }}">{{ user.username }}</a></td>
+        <td>{{ user.email }}</td>
+        <td>{{ "Yes" if user.is_admin else "No" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h2>Posts</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>User</th>
+        <th>Content</th>
+        <th>Date/Time</th>
+        <th>Has Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for post in posts %}
+      <tr>
+        <td>{{ post.id }}</td>
+        <td>
+          <a href="/profile/{{ post.user.username }}"
+            >{{ post.user.username }}</a
+          >
+        </td>
+        <td>
+          {{ post.content[:50] }}{% if post.content|length > 50 %}...{% endif %}
+        </td>
+        <td>{{ post.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+        <td>{{ "Yes" if post.image_path else "No" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

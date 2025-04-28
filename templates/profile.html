@@ -1,0 +1,29 @@
+<!-- templates/profile.html -->
+{% extends "base.html" %} {% block title %}{{ profile_user.username }}'s
+Profile{% endblock %} {% block content %}
+<div class="card">
+  <h1>{{ profile_user.username }}'s Profile</h1>
+  <p>Email: {{ profile_user.email }}</p>
+</div>
+
+<h2>Posts</h2>
+{% if posts %} {% for post in posts %}
+<div class="post">
+  <div class="post-header">
+    <strong>{{ profile_user.username }}</strong>
+    <span class="post-date"
+      >{{ post.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</span
+    >
+  </div>
+  <div class="post-content">{{ post.content }}</div>
+  {% if post.image_path %}
+  <img
+    src="/static/{{ post.image_path }}"
+    alt="Post image"
+    class="post-image"
+  />
+  {% endif %}
+</div>
+{% endfor %} {% else %}
+<p>No posts yet.</p>
+{% endif %} {% endblock %}

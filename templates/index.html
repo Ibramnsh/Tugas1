@@ -1,0 +1,20 @@
+<!-- templates/index.html -->
+{% extends "base.html" %} {% block title %}Welcome to Social Media App{%
+endblock %} {% block content %}
+<div class="card">
+  <h1>Welcome to Social Media App</h1>
+  <p>A simple platform to share your thoughts with the world.</p>
+
+  {% if not user %}
+  <p>
+    <a href="/register" class="btn">Register</a>
+    <a href="/login" class="btn">Sign In</a>
+  </p>
+  {% else %}
+  <p>
+    You are logged in as {{ user.username }}.
+    <a href="/dashboard">Go to Dashboard</a>
+  </p>
+  {% endif %}
+</div>
+{% endblock %}
